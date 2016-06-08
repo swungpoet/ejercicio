@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+    <!--Estilos-->
+     <link rel="stylesheet" href="css/miestilo.css">
+    <!--Librerias javascript-->
+    <script src="js/jquery-1.11.2.min.js"></script>
+     <!--Librerias AngularJs-->
+     <script src="js/angular.min.js"></script>
+     <script src="js/angular-ui-router.min.js"></script>
+     <script src="js/angular-resource.min.js"></script>
+     <!--Librerias de la aplicacion-->
+     <script src="app/app.js"></script>
+     <script src="app/MainCtrl.js"></script>
+     <!--Servicios-->
+</head>
+<body ng-app="AdministradordeTareas">
+
+<section class="portada backgraund">
+
+ <header class="header">
+    <figure class="logotipo">
+    <a ui-sref="inicio">
+<img src="imagenes/AngularJS.png" width="150" alt="Angular">
+   </a>
+    </figure>
+    
+<span class="burguer-button icon-menu" id="burguer-button"></span>
+    
+    <nav id="menu" class="menu">
+    <ul>
+        <li>
+            <a ui-sref="inicio" class="activo"><strong>Bienvenidos</strong></a>
+        </li>
+        <li>
+            <a ui-sref="inicio#foter"><strong>Contenido</strong></a>
+        </li>
+        <li>
+            <a ui-sref="acercade"><strong>AcercaDe</strong></a>
+        </li>
+    </ul>
+</nav>
+</header>
+
+<div class="contenedor">
+    <h1>Bienvenido a mi sitio web con <span>AngularJS</span></h1>
+    <h3>CSS Responsive</h3>
+    <h3>Node</h3>
+</div>
+</section>
+
+ <div ng-controller="MainCtrl as vm">
+    <div>
+        <span>{{ vm.saludo }}</span>
+    </div>
+    <div>
+        <span ng-bind="vm.despedida">       
+            </span>
+    </div>
+</div> 
+   <div id="contenedor-principal">
+        <div ui-view></div>
+    </div>  
+    
+ <footer class="footer" id="foter">
+			<div class="contenedo">
+		<div class="contacto">
+			 <img src="imagenes/AngularJS.png" alt="logotipo blanco" width="150" />
+<br/>
+			 <a href="tel:+525529024224"><strong>Telefono: </strong><span>3024456678</span></a>
+
+			<a href="mailto:contacto@cars.com"><strong>E-mail: </strong><span>contacto@cars.com</span></a>
+		</div>
+
+			<form class="formulario">
+<div class="col1">
+				<label for="nombre">Nombre: </label>
+
+                <input type="text" required placeholder="Nombre" id="nombre" name="nombre"/>
+
+                 <label for="mail">E-mail: </label>
+
+                <input type="email" required placeholder="E-mail" id="mail" name="email"/>
+
+<div class="sexo">
+             	<label for="woman"> 
+               <input type="radio" checked id="woman" name="sexo" value="mujer">Mujer
+				</label>
+
+				<label for="man"> 
+               <input type="radio" id="man" name="sexo" value="hombre">Hombre
+				</label>
+</div>
+
+<div class="intereses">
+<label for="cotizacion">
+<input type="checkbox" checked id="cotizacion" name="intereses" value="cotizacion"/>Cotizacion
+</label>
+
+<label for="reclamos">
+<input type="checkbox" id="reclamos" name="intereses" value="reclamos"/>Reclamos
+</label>
+
+<label for="comentarios">
+<input type="checkbox" id="comentarios" name="intereses" class="comenta" value="comentarios"/>Comentarios
+</label>
+
+<label for="otros">
+<input type="checkbox" id="otros" name="intereses" value="otros"/>Otros
+</label>
+
+</div>
+</div>
+
+<div class="col2">
+<label for="comentario">Comentarios</label>
+<textarea name="comentario" id="comentario" cols="30" rows="7"></textarea>
+<input type="submit" value="Enviar" class="button"/>
+     </div>
+   </form>
+  </div>
+</footer>
+  
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.7/hammer.min.js"></script>  
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/blazy/1.5.4/blazy.min.js"></script>   
+    
+    
+ <script>
+var consulta = window.matchMedia('(max-width: 480px)');
+     
+consulta.addListener(mediaQuery);
+     
+var $burguerButton = document.getElementById('burguer-button');
+     
+var $menu = document.getElementById('menu');
+  function toggleMenu(){
+        $menu.classList.toggle('active')
+      };
+  function showMenu(){
+        $menu.classList.add('active');
+      };
+  function hideMenu(){
+        $menu.classList.remove('active');
+      };
+
+  function mediaQuery() {
+        if (consulta.matches) {
+          // si se cumple hagamos esto
+          console.log('se cumplió la condicion');
+          $burguerButton.addEventListener('click', toggleMenu);
+        } else {
+          $burguerButton.removeEventListener('click', toggleMenu);
+          // si no se cumple hagamos esto touchstart
+          console.log('no se cumplió la condicion');
+        }
+      }
+      mediaQuery();
+
+      // lazy loading
+      var bLazy = new Blazy({
+          selector: 'img'
+      });
+      // $burguerButton.addEventListener('touchstart', toggleMenu);
+
+      // function toggleMenu(){
+      //   $menu.classList.toggle('active')
+      // };
+
+      // Gestos touch
+      var $body = document.body;
+
+      var gestos = new Hammer($body);
+      gestos.on('swipeleft', hideMenu);
+      gestos.on('swiperight', showMenu);
+    </script>
+    
+       
+
+    
+</body>
+
+</html>
